@@ -1,0 +1,168 @@
+@media (max-width:980px){
+    .center{
+        padding: 0 20px;
+    }
+}
+/*Header*/
+
+@media (max-width:850px){
+    .header_in nav{
+        background-color: rgba(54, 54, 54, .85);
+       width: 100%;
+        height: auto;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+  }
+    .section_nav{
+        display: none;
+    }
+    .header_in nav ul{
+        flex-direction: column;
+    }
+    .header_in nav ul li{
+        font-size: 18px;
+        width: 100%;
+    }
+    .header_in nav ul li a:hover{
+        background-color: rgb(143, 134, 134);
+    }
+    .header_in nav i{
+        display: block!important;
+    }
+    .nav_resp{
+        display: block;
+    }
+  }
+  @media (min-width:851px){
+    .header_in nav{
+        display: block!important;
+  }
+}
+
+/*About section*/
+
+@media (max-width:900px){
+    .about_in{
+        padding: 0 15px;
+    }
+    .about_left{
+       display: none; 
+    }
+}
+
+/*Service section*/
+
+@media(max-width:1020px){
+    .services_bottom{
+        padding: 0 20px;
+    }
+}
+
+/*Gallery section*/
+
+@media (max-width:1000px){
+	.gallery_bottom{
+		margin:0 20px;
+		grid-template-columns:auto auto;
+	}
+}
+@media (max-width:590px){
+	.gallery_bottom{
+		margin:0 50px;
+		grid-template-columns:auto;
+    }
+    .chat{
+        right: 0;
+    }
+}
+
+/*Shop section*/
+
+@media(max-width:1000px){
+    .shop_in ul{
+        grid-template-columns: auto auto auto;
+    }
+    .shop_in ul li:nth-last-child(1),.shop_in ul li:nth-last-child(2){
+        display: none;
+    }
+
+}
+@media(max-width:792px){
+    .shop_in ul{
+        grid-template-columns: auto auto;
+    }
+    .shop_in ul li:nth-last-child(3),.shop_in ul li:nth-last-child(4){
+        display: none;
+    }
+}
+@media(max-width:550px){
+    .shop_in ul{
+        grid-template-columns:auto;
+    }
+    .shop_in ul li{
+       padding: 40px!important;
+    }
+}
+
+/*Contact section*/
+
+@media (max-width:1040px){
+    .contact_bottom form > *{
+        width: 80%!important;
+        margin-right: 0!important;
+    }
+    .contact_bottom{
+        margin: 0;
+    }
+}
+
+/*Relative section*/
+
+@media(max-width:850px){
+    .relation_in{
+        flex-direction: column;
+    }
+    .relation_method{
+        width: 100%;
+    }
+        section h2,.barber_image_in h3{
+            font-size: 40px!important;
+        }
+        .barber_image_in h4{
+            font-size: 28px;
+        }
+}
+@media(max-width:500px){
+    .relation_method{
+        width: 100%;
+    }
+        section h2,.barber_image_in h3{
+            font-size: 29px!important;
+        }
+        .barber_image_in h4{
+            font-size: 22px;
+        }
+}
+
+/*Checkout*/
+
+@media(max-width:800px){
+    .checkout_in{
+        flex-direction: column;
+    }
+}
+@media(max-width:400px){
+   .header_left h1{
+       display: none;
+   }
+}
+
+/*Shop*/
+@media(max-width:370px){
+.card{
+    min-width:100%;
+    max-width: 300px;
+}
+}

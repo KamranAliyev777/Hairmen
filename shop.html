@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hairmen.az</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+	<meta name="description" content=" Bizim şirkətimiz dünyanın 16 ölkəsindən olan 89 şirkətlə əlaqələri var və 30 dan çox veb məhsulumuzu dünya şirkətlərinə satmışıq">
+	<link rel="shortcut icon" href="./css/images/favicon.ico">
+    <link rel="stylesheet" href="./css/star.css">
+    <link rel="stylesheet" href="./css/awesome.css">
+    <link rel="stylesheet" href="./css/barber.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <script src='./js/jquery-latest.js'></script>
+    <script src='./js/angular.min.js'></script>
+    <script src='./js/open_close.js'></script>
+    <script src="./js/shop.js"></script>
+    <script src="./js/checkout.js"></script>
+    <script src="./js/zoom.js"></script>
+    <script src="./js/shop_angular.js" defer></script>
+</head>
+
+<body ng-app='myApp' ng-controller='shop_ctrl'>
+    <div class="card">
+        <div class="title">
+            <i class="fa fa-arrow-right"></i>
+            <div><span>Cart</span></div>
+        </div>
+        <div class="cards_section" ng-if='card_list.length > 0'>
+            <ul class="cards">
+                <li ng-repeat="(key,item) in card_list">
+                    <div class="cards_image">
+                        <img ng-src="{{item.src}}" />
+
+                    </div>
+                    <div class="image_info">
+                        <span style="font-size: 18px;
+                        width: 90%;
+                        font-weight: lighter;
+                        line-height: 1.5em;
+                        margin-bottom: 10px;">{{item.name}}</span>
+                        <span style="font-size: 15px;">QTY: {{item.qty}}</span>
+                        <span style="margin-top: 5px;" class="card_price">${{item.price_total}}</span>
+                    </div>
+                    <button ng-click='remove_card(key)'><i class="fa fa-close"></i></button>
+                </li>
+            </ul>
+            <div class="mark_all">
+                <span>Subtotal</span>
+                <span class="all_total">${{price_all}}</span>
+            </div>
+            <div class="view_card">
+                <a href="./checkout.html" style="width: 100%;">
+                    <button type="button">View Cart</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <header class="header_checkout full_w">
+        <div class="center full_h">
+            <div class="header_checkout_in ful_w full_h">
+            <a href="./main.html">
+                <div class='header_left'>
+                    <div class="header_icon">
+                        <i class="fa fa-scissors"></i>
+                    </div>
+                    <h1>HAIRMEN</h1>
+                </div>
+                </a>
+                <div class="shop_bag">
+                    <i class="fa fa-shopping-bag"></i>
+                    <span>0</span>
+                </div>
+            </div>
+            </div>
+    </header>
+    <main>
+    <section class="shop full_w">
+        <div class="center">
+            <div class="shop_in full_w">
+                <h2>Shop</h2>
+                <ul></ul>
+            </div>
+        </div>
+    </section>
+    <div class="shop_list full_w">
+        <div class="center">
+            <div class="shop_list_in full_w">
+                <span><i class='fa fa-close'></i></span>
+                <div class='shop_list_left'>
+                </div>
+                <div class="shop_list_right">
+                    <h2></h2>
+                    <div class="sku">SKU: <span></span></div>
+                    <span></span>
+                    <form>
+                        <div class="qty">
+                            <label>Quantity</label>
+                            <input type="number" min="1" step="1" value="1" ng-model='qty'>
+                        </div>
+                        <button type="submit" ng-click='add()'>ADD TO CARD</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+        <footer class="footer full_w ">
+            <div class="center">
+                <div class="footer_in full_w">
+                    <p>© 2023 by Wix.com</p>
+                    <button type="button"><a href="#" data-src=".barber_image">Başa dön</a></button>
+                </div>
+            </div>
+        </footer>
+</body>
+
+</html>

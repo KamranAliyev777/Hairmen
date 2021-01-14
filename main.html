@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hairmen.az</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="description"
+        content=" Bizim şirkətimiz dünyanın 16 ölkəsindən olan 89 şirkətlə əlaqələri var və 30 dan çox veb məhsulumuzu dünya şirkətlərinə satmışıq">
+    <link rel="shortcut icon" href="./css/images/favicon.ico">
+    <link rel="stylesheet" href="./css/star.css">
+    <link rel="stylesheet" href="./css/awesome.css">
+    <link rel="stylesheet" href="./css/barber.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    <script src='./js/jquery-latest.js'></script>
+    <script src='./js/angular.min.js'></script>
+    <script src='./js/open_close.js'></script>
+    <script src='./js/scroll_nav.js'></script>
+    <script src="./js/images.js"></script>
+    <script src="./js/textarea.js"></script>
+    <script src="./js/shop.js"></script>
+    <script src='./js/zoom.js'></script>
+    <script src="./js/shop_angular.js" defer></script>
+</head>
+
+<body ng-app='myApp' ng-controller='shop_ctrl'>
+    <div class="chat_icon">
+        <button class='chat_icon_button' onclick="open_chat_icon()">
+            <span><i class="fa fa-commenting-o "></i>
+        </button>
+    </div>
+    <div class="chat">
+        <button type="button"><span><i class="fa fa-times" onclick="close_me()"></i></span></button>
+        <div class="chat_welcome full_w full_h">
+            <div class="chat_welcome_in">
+                <div class="welcome_top">
+                    <h3>Onlayn Çata xoş gəlmisiniz!</h3>
+                    <p>Çata qoşulmaq üçün müvafiq məlumatı qeyd etməyiniz xahiş olunur.</p>
+                </div>
+                <label for="phone">
+                    <input id="phone" name="phone" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
+                        placeholder="051-555-55-55">
+                </label>
+                <label for="mail">
+                    <input id="mail" name='mail' type="email" placeholder="Mail ünvanınız" maxlength="100">
+                </label>
+                <label for="name">
+                    <input id="name" class="name" name="name" type="text" maxlength="30" placeholder="Adınız">
+                </label>
+                <button type="submit" class='start_btn'>Çata başlamaq</button>
+            </div>
+        </div>
+        <div class="chat_start full_w full_h">
+            <div class="chat_top">
+                <div class="chat_top_left">
+                    <h2>Let's Chat!</h2>
+                    <span>
+                        <i class="fa fa-bolt"></i>
+                        We’ll reply as soon as we can
+                    </span>
+                </div>
+            </div>
+            <div class="chat_messages">
+                <div class="chat_time">
+                    <div class="chat_line"></div>
+                    <span class="chat_clock"></span>
+                    <div class="chat_line"></div>
+                </div>
+            </div>
+            <div class="chat_write">
+                <div class="chat_write_in">
+                    <div class="smile">
+                        <i class="fa fa-smile-o"></i>
+                    </div>
+                    <textarea placeholder="Type your message…" rows="1"></textarea>
+                    <div class="chat_send">
+                        <label for='file_input'>
+                            <i class="fa fa-file-text-o"></i>
+                        </label>
+                        <input type="file" style="display: none;" id="file_input">
+                        <span style="display: none;">
+                            <i class="fa fa-paper-plane"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="smiles_div">
+                <div class="categories">
+                    <button class="people border_pointer" type="button">😃</button>
+                    <button class="nature" type="button">🐻</button>
+                    <button class="food" type="button">🍔</button>
+                    <button class="activity" type="button">⚽</button>
+                    <button class="travel" type="button">🌇</button>
+                    <button class="object" type="button">💡</button>
+                    <button class="symbol" type="button">🔣</button>
+                </div>
+                <div class='smiles_panel'>
+                    <div class="smiles"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="title">
+            <i class="fa fa-arrow-right"></i>
+            <div><span>Cart</span></div>
+        </div>
+        <div class="cards_section" ng-if='card_list.length > 0'>
+            <ul class="cards">
+                <li ng-repeat="(key,item) in card_list">
+                    <div class="cards_image">
+                        <img ng-src="{{item.src}}" />
+
+                    </div>
+                    <div class="image_info">
+                        <span style="font-size: 18px;
+                        width: 90%;
+                        font-weight: lighter;
+                        line-height: 1.5em;
+                        margin-bottom: 10px;">{{item.name}}</span>
+                        <span style="font-size: 15px;">QTY: {{item.qty}}</span>
+                        <span style="margin-top: 5px;" class="card_price">${{item.price_total}}</span>
+                    </div>
+                    <button ng-click='remove_card(key)'><i class="fa fa-close"></i></button>
+                </li>
+            </ul>
+            <div class="mark_all">
+                <span>Subtotal</span>
+                <span class="all_total">${{price_all}}</span>
+            </div>
+            <div class="view_card">
+                <a href="./checkout.html" style="width: 100%;">
+                    <button type="button">View Cart</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <header class="header full_w">
+        <div class="center full_h">
+            <div class="header_in full_h">
+                <div class='nav_resp'>
+                    <button type="button">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+                <a href="./main.html">
+                    <div class="header_left">
+                        <div class="header_icon">
+                            <i class="fa fa-scissors"></i>
+                        </div>
+                        <h1>HAIRMEN</h1>
+                    </div>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href='#' class="menu1_a nav_top_color" data-src=".barber_image">Home</a></li>
+                        <li><a href='#' class="menu1_a" data-src="#about">About</a></li>
+                        <li><a href='#' class="menu1_a" data-src="#services">Services</a></li>
+                        <li><a href='#' class="menu1_a" data-src="#gallery">Gallery</a></li>
+                        <li><a href='#' class="menu1_a" data-src="#shop">Shop</a></li>
+                        <li><a href='#' class="menu1_a" data-src="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <!--<div class="header_right full_w">
+                    <button class="login">
+                        <i class="fa fa-user-circle"></i>
+                        <span>Log In</span>
+                    </button>-->
+                <div class="shop_bag">
+                    <i class="fa fa-shopping-bag"></i>
+                    <span>0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main role="main">
+        <nav class="section_nav">
+            <ul class="full_h full_w">
+                <li><a href='#' class="menu2_a" data-src=".barber_image"><span class="nav_right_color"></span></a></li>
+                <li><a href='#' class="menu2_a" data-src="#about"><span></span></a></li>
+                <li><a href='#' class="menu2_a" data-src="#services"><span></span></a></li>
+                <li><a href='#' class="menu2_a" data-src="#gallery"><span></span></a></li>
+                <li><a href='#' class="menu2_a" data-src="#shop"><span></span></a></li>
+                <li><a href='#' class="menu2_a" data-src="#contact"><span></span></a></li>
+            </ul>
+        </nav>
+        <section class="barber_image full_w">
+            <video autoplay loop muted width="100%" height="100%" class='full_w'>
+                <source src="./css/videos/barber.mp4" type="video/mp4">
+            </video>
+        </section>
+        <section class="about full_w" id='about'>
+            <div class="center">
+                <div class="about_in full_w">
+                    <h2>OUR STORY</h2>
+                    <div class="about_in_bottom full_w">
+                        <div class='about_left'>
+                            <img src="css/images/barber2.jpg" alt="image for about">
+                        </div>
+                        <div class="about_p full_w">
+                            <p>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit
+                                Text” or double click me and you can start adding your own content and make changes to
+                                the font. Feel free to drag and drop me anywhere you like on your page. I’m a great
+                                place for you to tell a story and let your users know a little more about you.</p></br>
+                            <p>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit
+                                Text” or double click me and you can start adding your own content and make changes to
+                                the font. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="services full_w" id="services" style='background-image: url(css/images/barber3.png);'>
+            <div class="center">
+                <div class="services_in full_w">
+                    <h2>SERVICES</h2>
+                    <div class="services_bottom">
+                        <div class="services_mark">
+                            <div class="services_list">
+                                <p>Signature Haircut</p>
+                                <p>$25</p>
+                            </div>
+                            <div class="services_about">
+                                <span>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just
+                                    click “Edit Text” or double click me and you can start adding your own content and
+                                    make changes to the font. Feel free to drag and drop me anywhere you like on your
+                                    page. I’m a great place for you to tell a story and let your users know a little
+                                    more about you.</span>
+                            </div>
+                        </div>
+                        <div class="services_mark">
+                            <div class="services_list">
+                                <p>Haircut</p>
+                                <p>$20</p>
+                            </div>
+                            <div class="services_about">
+                                <span>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just
+                                    click “Edit Text” or double click me and you can start adding your own content and
+                                    make changes to the font. Feel free to drag and drop me anywhere you like on your
+                                    page. I’m a great place for you to tell a story and let your users know a little
+                                    more about you.</span>
+                            </div>
+                        </div>
+                        <div class="services_mark">
+                            <div class="services_list">
+                                <p>Beard Shaving</p>
+                                <p>$15</p>
+                            </div>
+                            <div class="services_about">
+                                <span>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just
+                                    click “Edit Text” or double click me and you can start adding your own content and
+                                    make changes to the font. Feel free to drag and drop me anywhere you like on your
+                                    page. I’m a great place for you to tell a story and let your users know a little
+                                    more about you.</span>
+                            </div>
+                        </div>
+                        <div class="services_mark">
+                            <div class="services_list">
+                                <p>Beard Trim</p>
+                                <p>$15</p>
+                            </div>
+                            <div class="services_about">
+                                <span>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just
+                                    click “Edit Text” or double click me and you can start adding your own content and
+                                    make changes to the font. Feel free to drag and drop me anywhere you like on your
+                                    page. I’m a great place for you to tell a story and let your users know a little
+                                    more about you.</span>
+                            </div>
+                        </div>
+                        <div class="services_mark">
+                            <div class="services_list">
+                                <p>Cut & Shave</p>
+                                <p>$30</p>
+                            </div>
+                            <div class="services_about">
+                                <span>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just
+                                    click “Edit Text” or double click me and you can start adding your own content and
+                                    make changes to the font. Feel free to drag and drop me anywhere you like on your
+                                    page. I’m a great place for you to tell a story and let your users know a little
+                                    more about you.</span>
+                            </div>
+                        </div>
+                        <div class="services_mark">
+                            <div class="services_list">
+                                <p>Deep Tissue Shave</p>
+                                <p>$22</p>
+                            </div>
+                            <div class="services_about">
+                                <span>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just
+                                    click “Edit Text” or double click me and you can start adding your own content and
+                                    make changes to the font. Feel free to drag and drop me anywhere you like on your
+                                    page. I’m a great place for you to tell a story and let your users know a little
+                                    more about you.</span>
+                            </div>
+                        </div>
+                        <div class="services_mark">
+                            <div class="services_list">
+                                <p>Eyebrow Threading</p>
+                                <p>$10</p>
+                            </div>
+                            <div class="services_about">
+                                <span>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just
+                                    click “Edit Text” or double click me and you can start adding your own content and
+                                    make changes to the font. Feel free to drag and drop me anywhere you like on your
+                                    page. I’m a great place for you to tell a story and let your users know a little
+                                    more about you.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="gallery" id="gallery">
+            <div class="center">
+                <div class="gallery_in">
+                    <div class="gallery_top">
+                        <h2>Gallery</h2>
+                    </div>
+                    <div class="gallery_bottom">
+                        <div class="image">
+                            <ul class="share_image">
+                                <li><a
+                                        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&t=I’m%20an%20image%20title"><i
+                                            class="fa fa-facebook "></i></a></li>
+                                <li><a
+                                        href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&amp;text=I’m%20an%20image%20title&amp;hashtags=gallery%2Cphotos%2Cphotographer%2Cprofessional"><i
+                                            class="fa fa-twitter"></i></a></li>
+                                <li><a
+                                        href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&media=https%3A%2F%2Fstatic.wixstatic.com%2Fmedia%2Fb47b0e3204d54a93b13108b60de2f04a.jpg%2Fv1%2Ffill%2Fw_500%2Ch_329%2Cal_c%2Cq_90%2Fb47b0e3204d54a93b13108b60de2f04a.jpg&description=I’m%20an%20image%20title"><i
+                                            class="fa fa-pinterest-square"></i></a></li>
+                                <li><a
+                                        href="http://www.tumblr.com/share/link?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0"><i
+                                            class="fa fa-tumblr"></i></a></li>
+                                <li><a href="mailTo:mymail@gmail.com?subject=The%20subject%20of%20the%20mail"><i
+                                            class="fa fa-envelope-o"></i></a></li>
+                            </ul><button type="button" class="button_click"><i class="fa fa-heart"></i><span
+                                    class="click_span"></span></button><button type="button" class="button_share"><i
+                                    class="fa fa-share"></i></button><img src="css/images/barber_grid1.jpg"
+                                title="I’m an image title" description="Describe your image here.">
+                        </div>
+                        <div class="image">
+                            <ul class="share_image">
+                                <li><a
+                                        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&t=I’m%20an%20image%20title"><i
+                                            class="fa fa-facebook "></i></a></li>
+                                <li><a
+                                        href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&amp;text=I’m%20an%20image%20title&amp;hashtags=gallery%2Cphotos%2Cphotographer%2Cprofessional"><i
+                                            class="fa fa-twitter"></i></a></li>
+                                <li><a
+                                        href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&media=https%3A%2F%2Fstatic.wixstatic.com%2Fmedia%2Fb47b0e3204d54a93b13108b60de2f04a.jpg%2Fv1%2Ffill%2Fw_500%2Ch_329%2Cal_c%2Cq_90%2Fb47b0e3204d54a93b13108b60de2f04a.jpg&description=I’m%20an%20image%20title"><i
+                                            class="fa fa-pinterest-square"></i></a></li>
+                                <li><a
+                                        href="http://www.tumblr.com/share/link?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0"><i
+                                            class="fa fa-tumblr"></i></a></li>
+                                <li><a href="mailTo:mymail@gmail.com?subject=The%20subject%20of%20the%20mail"><i
+                                            class="fa fa-envelope-o"></i></a></li>
+                            </ul><button type="button" class="button_click"><i class="fa fa-heart"></i><span
+                                    class="click_span"></span></button><button type="button" class="button_share"><i
+                                    class="fa fa-share"></i></button><img src="css/images/barber_grid2.jpg"
+                                title="I’m an image title" description="Describe your image here.">
+                        </div>
+                        <div class="image">
+                            <ul class="share_image">
+                                <li><a
+                                        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&t=I’m%20an%20image%20title"><i
+                                            class="fa fa-facebook "></i></a></li>
+                                <li><a
+                                        href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&amp;text=I’m%20an%20image%20title&amp;hashtags=gallery%2Cphotos%2Cphotographer%2Cprofessional"><i
+                                            class="fa fa-twitter"></i></a></li>
+                                <li><a
+                                        href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&media=https%3A%2F%2Fstatic.wixstatic.com%2Fmedia%2Fb47b0e3204d54a93b13108b60de2f04a.jpg%2Fv1%2Ffill%2Fw_500%2Ch_329%2Cal_c%2Cq_90%2Fb47b0e3204d54a93b13108b60de2f04a.jpg&description=I’m%20an%20image%20title"><i
+                                            class="fa fa-pinterest-square"></i></a></li>
+                                <li><a
+                                        href="http://www.tumblr.com/share/link?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0"><i
+                                            class="fa fa-tumblr"></i></a></li>
+                                <li><a href="mailTo:mymail@gmail.com?subject=The%20subject%20of%20the%20mail"><i
+                                            class="fa fa-envelope-o"></i></a></li>
+                            </ul><button type="button" class="button_click"><i class="fa fa-heart"></i><span
+                                    class="click_span"></span></button><button type="button" class="button_share"><i
+                                    class="fa fa-share"></i></button><img src="css/images/barber_grid3.jpg"
+                                title="I’m an image title" description="Describe your image here.">
+                        </div>
+                        <div class="image">
+                            <ul class="share_image">
+                                <li><a
+                                        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&t=I’m%20an%20image%20title"><i
+                                            class="fa fa-facebook "></i></a></li>
+                                <li><a
+                                        href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&amp;text=I’m%20an%20image%20title&amp;hashtags=gallery%2Cphotos%2Cphotographer%2Cprofessional"><i
+                                            class="fa fa-twitter"></i></a></li>
+                                <li><a
+                                        href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&media=https%3A%2F%2Fstatic.wixstatic.com%2Fmedia%2Fb47b0e3204d54a93b13108b60de2f04a.jpg%2Fv1%2Ffill%2Fw_500%2Ch_329%2Cal_c%2Cq_90%2Fb47b0e3204d54a93b13108b60de2f04a.jpg&description=I’m%20an%20image%20title"><i
+                                            class="fa fa-pinterest-square"></i></a></li>
+                                <li><a
+                                        href="http://www.tumblr.com/share/link?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0"><i
+                                            class="fa fa-tumblr"></i></a></li>
+                                <li><a href="mailTo:mymail@gmail.com?subject=The%20subject%20of%20the%20mail"><i
+                                            class="fa fa-envelope-o"></i></a></li>
+                            </ul><button type="button" class="button_click"><i class="fa fa-heart"></i><span
+                                    class="click_span"></span></button><button type="button" class="button_share"><i
+                                    class="fa fa-share"></i></button><img src="css/images/barber_grid4.jpg"
+                                title="I’m an image title" description="Describe your image here.">
+                        </div>
+                        <div class="image">
+                            <ul class="share_image">
+                                <li><a
+                                        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&t=I’m%20an%20image%20title"><i
+                                            class="fa fa-facebook "></i></a></li>
+                                <li><a
+                                        href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&amp;text=I’m%20an%20image%20title&amp;hashtags=gallery%2Cphotos%2Cphotographer%2Cprofessional"><i
+                                            class="fa fa-twitter"></i></a></li>
+                                <li><a
+                                        href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&media=https%3A%2F%2Fstatic.wixstatic.com%2Fmedia%2Fb47b0e3204d54a93b13108b60de2f04a.jpg%2Fv1%2Ffill%2Fw_500%2Ch_329%2Cal_c%2Cq_90%2Fb47b0e3204d54a93b13108b60de2f04a.jpg&description=I’m%20an%20image%20title"><i
+                                            class="fa fa-pinterest-square"></i></a></li>
+                                <li><a
+                                        href="http://www.tumblr.com/share/link?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0"><i
+                                            class="fa fa-tumblr"></i></a></li>
+                                <li><a href="mailTo:mymail@gmail.com?subject=The%20subject%20of%20the%20mail"><i
+                                            class="fa fa-envelope-o"></i></a></li>
+                            </ul><button type="button" class="button_click"><i class="fa fa-heart"></i><span
+                                    class="click_span"></span></button><button type="button" class="button_share"><i
+                                    class="fa fa-share"></i></button><img src="css/images/barber_grid5.jpg"
+                                title="I’m an image title" description="Describe your image here.">
+                        </div>
+                        <div class="image">
+                            <ul class="share_image">
+                                <li><a
+                                        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&t=I’m%20an%20image%20title"><i
+                                            class="fa fa-facebook "></i></a></li>
+                                <li><a
+                                        href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&amp;text=I’m%20an%20image%20title&amp;hashtags=gallery%2Cphotos%2Cphotographer%2Cprofessional"><i
+                                            class="fa fa-twitter"></i></a></li>
+                                <li><a
+                                        href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0&media=https%3A%2F%2Fstatic.wixstatic.com%2Fmedia%2Fb47b0e3204d54a93b13108b60de2f04a.jpg%2Fv1%2Ffill%2Fw_500%2Ch_329%2Cal_c%2Cq_90%2Fb47b0e3204d54a93b13108b60de2f04a.jpg&description=I’m%20an%20image%20title"><i
+                                            class="fa fa-pinterest-square"></i></a></li>
+                                <li><a
+                                        href="http://www.tumblr.com/share/link?url=https%3A%2F%2Fwww.wix.com%2Fdemone2%2Fbarbershop%2Fdemone2%2Fbarbershop%3Fpgid%3Dj6an1d6o-842374c0-5eb9-11ea-8c85-12879e2400f0"><i
+                                            class="fa fa-tumblr"></i></a></li>
+                                <li><a href="mailTo:mymail@gmail.com?subject=The%20subject%20of%20the%20mail"><i
+                                            class="fa fa-envelope-o"></i></a></li>
+                            </ul><button type="button" class="button_click"><i class="fa fa-heart"></i><span
+                                    class="click_span"></span></button><button type="button" class="button_share"><i
+                                    class="fa fa-share"></i></button><img src="css/images/barber_grid6.jpg"
+                                title="I’m an image title" description="Describe your image here.">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="shop full_w" id="shop">
+            <div class="center">
+                <div class="shop_in full_w">
+                    <h2>Shop</h2>
+                    <ul>
+                        <li>
+                            <div><a href="#">Quick View</a><img src="css/images/shop1.jpg"></div>
+                            <h3>Aftershave Cream</h3><span class="mark">$28.00</span>
+                        </li>
+                        <li>
+                            <div><a href="#">Quick View</a><img src="css/images/shop1.jpg"></div>
+                            <h3>Aftershave Cream</h3><span class="mark">$28.00</span>
+                        </li>
+                        <li>
+                            <div><a href="#">Quick View</a><img src="css/images/shop1.jpg"></div>
+                            <h3>Aftershave Cream</h3><span class="mark">$28.00</span>
+                        </li>
+                        <li>
+                            <div><a href="#">Quick View</a><img src="css/images/shop1.jpg"></div>
+                            <h3>Aftershave Cream</h3><span class="mark">$28.00</span>
+                        </li>
+                        <li>
+                            <div><a href="#">Quick View</a><img src="css/images/shop1.jpg"></div>
+                            <h3>Aftershave Cream</h3><span class="mark">$28.00</span>
+                        </li>
+                        <li>
+                            <div><a href="#">Quick View</a><img src="css/images/shop1.jpg"></div>
+                            <h3>Aftershave Cream</h3><span class="mark">$28.00</span>
+                        </li>
+                    </ul>
+                    <div class='see_more'>
+                        <a href="./shop.html">See more</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="shop_list full_w">
+            <div class="center">
+                <div class="shop_list_in full_w">
+                    <div class="shop_close">
+                        <i class='fa fa-times'></i>
+                    </div>
+                    <div class='shop_list_left'></div>
+                    <div class="shop_list_right">
+                        <h2></h2>
+                        <div class="sku">SKU: <span></span></div>
+                        <span></span>
+                        <form>
+                            <div class="qty">
+                                <label>Quantity</label>
+                                <input type="number" min="1" step="1" value="1" ng-model='qty'>
+                            </div>
+                            <button type="submit" ng-click='add()'>ADD TO CARD</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="contact full_w" id="contact" style="background-image: url(css/images/barber4.png);">
+            <div class='center'>
+                <div class="contact_in full_w">
+                    <h2>CONTACT</h2>
+                    <div class="contact_bottom">
+                        <form action="" method="POST" class="contact_form">
+                            <input type="text" class="contact_name" placeholder="Name" required>
+                            <input type="email" class="contact_mail" placeholder="Email" required>
+                            <input type="text" class="subject" placeholder="Subject" required>
+                            <textarea placeholder="Message" class="contact_area" required></textarea>
+                            <button type="submit" value="submit" class="contact_button">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="relation full_w">
+            <div class="center">
+                <div class="relation_in">
+                    <div class="relation_method">
+                        <h6>RESERVİNG</h6>
+                        <p>Phone:<a href='tel:123-456-7890'>123-456-7890</a></p>
+                        <p>Email:<a href='mailTo:info@mysite.com'>info@mysite.com</a></p>
+                        <div class="relation_icon">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="relation_method">
+                        <h6>OUR ADDRESS</h6>
+                        <p>500 Terry Francois Street</p>
+                        <p>San Francisco, CA 94158</p>
+                    </div>
+                    <div class="relation_method">
+                        <h6>OPENING HOURS</h6>
+                        <p>Mon - Fri: 7am - 10pm<br>
+                            ​​Saturday: 8am - 10pm<br>
+                            ​Sunday: 8am - 11pm</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer full_w ">
+            <div class="center">
+                <div class="footer_in full_w">
+                    <p>© 2023 by Wix.com</p>
+                    <button type="button"><a href="#" data-src=".barber_image">Başa dön</a></button>
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+
+</html>
