@@ -469,7 +469,13 @@ section h2{
 /*---------------------
   Card
 -----------------------*/
-
+.empty{
+    height: 40px;
+    padding: 10px;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+}
 .cards_section{
     height: calc(100% - 100px - 114px);
     padding: 34px;
