@@ -105,6 +105,7 @@
             <i class="fa fa-arrow-right"></i>
             <div><span>Cart</span></div>
         </div>
+        <div class="empty" ng-If="card_list.length === 0">BAG IS EMPTY</div>
         <div class="cards_section" ng-if='card_list.length > 0'>
             <ul class="cards">
                 <li ng-repeat="(key,item) in card_list">
